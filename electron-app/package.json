@@ -1,0 +1,26 @@
+{
+    "name": "checkmed-tv-kiosk",
+    "version": "1.0.0",
+    "description": "CheckMed TV Kiosk - Isolated Runtime",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder"
+    },
+    "devDependencies": {
+        "electron": "^33.4.11",
+        "electron-builder": "^25.1.8"
+    },
+    "build": {
+        "appId": "com.checkmed.tv",
+        "productName": "CheckMed TV",
+        "directories": {
+            "output": "dist"
+        },
+        "win": {
+            "target": "portable",
+            "icon": "../public/icon-512.png"
+        }
+    }
+}

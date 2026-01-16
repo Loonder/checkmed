@@ -1,0 +1,128 @@
+# ==============================================================================
+# GLOBAL .GITIGNORE TEMPLATE - SEGURANÇA MÁXIMA
+# Use este arquivo como base para seus projetos Node.js / Next.js / React
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. DEPENDÊNCIAS E PACOTES (Nunca enviar)
+# ------------------------------------------------------------------------------
+/node_modules
+/jspm_packages
+/.pnp
+.pnp.js
+
+# Yarn
+.yarn/cache
+.yarn/fail-log
+.yarn/headers
+.yarn/install-state.gz
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn-integrity
+
+# NPM
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ------------------------------------------------------------------------------
+# 2. FRAMEWORKS & BUILDS (Arquivos gerados automaticamente)
+# ------------------------------------------------------------------------------
+# Next.js
+/.next/
+/out/
+
+# Create React App / Vite / Geral
+/dist/
+/build/
+
+# Mobile (React Native / Expo)
+/.expo/
+/web-build/
+
+# Electron
+/dist-electron/
+/release/
+
+# ------------------------------------------------------------------------------
+# 3. SEGURANÇA E AMBIENTE (CRÍTICO - NUNCA ENVIAR)
+# ------------------------------------------------------------------------------
+# Arquivos que contém chaves de API, senhas de banco, tokens, etc.
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+*.env.*
+
+# Chaves de segurança e certificados
+*.pem
+*.crt
+*.key
+*.p12
+*.jks
+
+# ------------------------------------------------------------------------------
+# 4. BANCO DE DADOS E BACKUPS (Evita vazar dados reais de clientes)
+# ------------------------------------------------------------------------------
+# Dumps de banco de dados, scripts com inserts, backups
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+*.dump(
+*.bak
+/backups/
+/migrations/
+/dump/
+/database/data/
+
+# ------------------------------------------------------------------------------
+# 5. IDEs E EDITORES (Configurações pessoais)
+# ------------------------------------------------------------------------------
+# VS Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+*.code-workspace
+
+# JetBrains (WebStorm, IntelliJ)
+.idea/
+*.iml
+
+# Outros
+.DS_Store (Mac)
+Thumbs.db (Windows)
+ehthumbs.db (Windows)
+Desktop.ini (Windows)
+
+# ------------------------------------------------------------------------------
+# 6. TESTES E LOGS
+# ------------------------------------------------------------------------------
+/coverage/
+*.lcov
+test-results/
+playwright-report/
+blob-report/
+*.log
+logs/
+*.pid
+*.seed
+*.pid.lock
+
+# ------------------------------------------------------------------------------
+# 7. ARQUIVOS TEMPORÁRIOS DO SISTEMA
+# ------------------------------------------------------------------------------
+*.swp
+*.swo
+*~
+#*#
+
+# ==============================================================================
+# FIM DO ARQUIVO
+# Copie o conteúdo deste arquivo para o ".gitignore" na raiz do seu novo projeto.
+# ==============================================================================

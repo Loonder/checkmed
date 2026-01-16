@@ -1,0 +1,107 @@
+{
+  "name": "checkmed-desktop",
+  "version": "1.0.0",
+  "description": "CheckMed - Sistema Médico Desktop",
+  "main": "electron/main.js",
+  "author": "CheckMed",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev --turbo",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "electron:dev": "cross-env NODE_ENV=development electron .",
+    "electron:build": "npm run build && electron-builder",
+    "electron:build:win": "npm run build && electron-builder --win",
+    "electron:build:mac": "npm run build && electron-builder --mac",
+    "electron:build:linux": "npm run build && electron-builder --linux",
+    "tv:start": "cd electron-app && npm start",
+    "tv:build": "cd electron-app && npm run dist"
+  },
+  "build": {
+    "appId": "com.checkmed.desktop",
+    "productName": "CheckMed",
+    "directories": {
+      "buildResources": "electron/resources",
+      "output": "dist"
+    },
+    "files": [
+      ".next/**/*",
+      "public/**/*",
+      "electron/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "public/icon-512.png",
+      "artifactName": "CheckMed-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "public/icon-512.png",
+      "uninstallerIcon": "public/icon-512.png",
+      "installerHeaderIcon": "public/icon-512.png",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "CheckMed"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "public/icon-512.png",
+      "category": "public.app-category.medical",
+      "artifactName": "CheckMed-${version}.${ext}"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "icon": "public/icon-512.png",
+      "category": "Office",
+      "artifactName": "CheckMed-${version}.${ext}"
+    }
+  },
+  "dependencies": {
+    "@next/bundle-analyzer": "^16.1.2",
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.90.0",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "framer-motion": "^12.24.10",
+    "lucide-react": "^0.562.0",
+    "next": "^15.1.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "recharts": "^3.6.0",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^3.4.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.1",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^5.1.2",
+    "autoprefixer": "^10.4.23",
+    "cross-env": "^7.0.3",
+    "electron": "^33.4.11",
+    "electron-builder": "^25.1.8",
+    "eslint": "^9",
+    "eslint-config-next": "^15.1.3",
+    "jsdom": "^27.4.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5",
+    "vitest": "^4.0.17"
+  }
+}
