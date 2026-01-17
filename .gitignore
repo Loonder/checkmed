@@ -55,3 +55,5 @@ playwright-report/
 *.sql
 migrations/
 supabase/migrations/
+global_gitignore_template.txt
+next
