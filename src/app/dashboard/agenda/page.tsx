@@ -69,14 +69,32 @@ export default function AgendaPage() {
     }, [currentDate, view]);
 
     const fetchTenantAndAppointments = async () => {
-        setLoading(true); // Show skeleton
+        setLoading(true);
         let currentTenantId = tenantId;
+
+        // 1. Strict Tenant Resolution (Security Fix)
         if (!currentTenantId) {
-            const { data: tenants } = await supabase.from("tenants").select("id").limit(1);
-            if (tenants?.[0]) {
-                currentTenantId = tenants[0].id;
-                setTenantId(currentTenantId);
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+                const { data: profile } = await supabase
+                    .from("profiles")
+                    .select("tenant_id")
+                    .eq("id", user.id)
+                    .single();
+
+                if (profile?.tenant_id) {
+                    currentTenantId = profile.tenant_id;
+                    setTenantId(currentTenantId);
+                }
             }
+        }
+
+        // 2. Security Gate: If no tenant is identified, DO NOT fetch data.
+        if (!currentTenantId) {
+            console.warn("Security: No tenant_id found for user. Aborting fetch.");
+            setAppointments([]); // Clear any potential stale data
+            setLoading(false);
+            return;
         }
 
         // Fetch range based on view
@@ -96,10 +114,9 @@ export default function AgendaPage() {
         let query = supabase
             .from("appointments")
             .select("*")
+            .eq("tenant_id", currentTenantId) // Strict filtering
             .gte("start_time", start)
             .lte("start_time", end);
-
-        if (currentTenantId) query = query.eq("tenant_id", currentTenantId);
 
         const { data, error } = await query;
         if (error) {
@@ -108,7 +125,7 @@ export default function AgendaPage() {
         } else {
             setAppointments(data || []);
         }
-        setLoading(false); // Hide skeleton
+        setLoading(false);
     };
 
     // Helper: Remove accents for search (José -> Jose)
@@ -208,14 +225,22 @@ export default function AgendaPage() {
         e.preventDefault();
         if (!selectedDate) return;
 
+        // Security: Strict Tenant Resolution
         let targetTenantId = tenantId;
         if (!targetTenantId) {
-            const { data: tenants } = await supabase.from("tenants").select("id").limit(1);
-            if (tenants?.[0]) targetTenantId = tenants[0].id;
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+                const { data: profile } = await supabase
+                    .from("profiles")
+                    .select("tenant_id")
+                    .eq("id", user.id)
+                    .single();
+                targetTenantId = profile?.tenant_id || null;
+            }
         }
 
         if (!targetTenantId) {
-            toast.error("Erro: Nenhuma clínica encontrada.");
+            toast.error("Erro de Segurança: Nenhuma clínica associada ao seu perfil.");
             return;
         }
 

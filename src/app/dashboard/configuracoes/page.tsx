@@ -5,12 +5,12 @@ import { supabase } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import {
     Building2, CreditCard, Save, CheckCircle, AlertTriangle,
-    Smartphone, Wifi, RotateCw, ShieldCheck
+    Smartphone, Wifi, RotateCw, ShieldCheck, Download, Monitor
 } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function SettingsPage() {
-    const [activeTab, setActiveTab] = useState<'profile' | 'payments'>('profile');
+    const [activeTab, setActiveTab] = useState<'profile' | 'payments' | 'downloads'>('profile');
     const [loading, setLoading] = useState(true);
 
     // Enterprise Data
@@ -122,6 +122,12 @@ export default function SettingsPage() {
                         className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition font-medium ${activeTab === 'payments' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'hover:bg-slate-900 text-slate-400'}`}
                     >
                         <CreditCard className="w-5 h-5" /> Maquininha & Pagamentos
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('downloads')}
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition font-medium ${activeTab === 'downloads' ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20' : 'hover:bg-slate-900 text-slate-400'}`}
+                    >
+                        <Download className="w-5 h-5" /> Downloads
                     </button>
                 </nav>
 
@@ -243,6 +249,53 @@ export default function SettingsPage() {
                                         >
                                             <RotateCw className="w-4 h-4" /> Testar Conexão
                                         </button>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )}
+
+                        {activeTab === 'downloads' && (
+                            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
+                                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                                    <h2 className="text-xl font-bold text-white mb-6">Downloads & Aplicativos</h2>
+
+                                    <div className="bg-slate-950 border border-slate-800 p-6 rounded-xl flex flex-col md:flex-row items-center gap-6 group hover:border-sky-500/30 transition">
+                                        <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 to-violet-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-900/20 group-hover:scale-105 transition">
+                                            <Monitor className="w-10 h-10 text-white" />
+                                        </div>
+                                        <div className="flex-1 text-center md:text-left">
+                                            <h3 className="text-lg font-bold text-white">CheckMed TV Kiosk</h3>
+                                            <p className="text-slate-400 text-sm mt-1">
+                                                Aplicativo oficial para Windows. Transforma qualquer computador ou mini-pc em um painel interativo de chamadas e mídia (Digital Signage).
+                                                <br />
+                                                <span className="text-xs text-sky-400 font-bold mt-2 block">Versão: 1.0.0 (BETA)</span>
+                                            </p>
+                                        </div>
+                                        <div className="flex flex-col gap-2 w-full md:w-auto">
+                                            <a
+                                                href="https://github.com/loonder/checkmed/releases"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="px-6 py-3 bg-white text-slate-900 hover:bg-slate-100 rounded-xl font-bold flex items-center justify-center gap-2 transition"
+                                            >
+                                                <Download className="w-4 h-4" /> Baixar (.exe)
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-6 p-4 bg-sky-500/5 rounded-xl border border-sky-500/10">
+                                        <div className="flex items-start gap-3">
+                                            <AlertTriangle className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
+                                            <div>
+                                                <h4 className="text-sm font-bold text-sky-400">Instruções de Instalação</h4>
+                                                <ul className="text-sm text-slate-400 list-disc list-inside mt-2 space-y-1">
+                                                    <li>Baixe e execute o instalador <strong>Setup.exe</strong>.</li>
+                                                    <li>O Windows pode exibir um alerta do SmartScreen. Clique em "Mais Informações" e "Executar assim mesmo".</li>
+                                                    <li>Após instalar, o app iniciará automaticamente em tela cheia na URL da TV.</li>
+                                                    <li>Use <strong>F11</strong> ou <strong>Alt+F4</strong> se precisar sair do modo Kiosk.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </motion.div>

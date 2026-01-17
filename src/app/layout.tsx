@@ -10,6 +10,33 @@ export const metadata: Metadata = {
   title: "CheckMed - Sistema Médico Completo",
   description: "Sistema completo de gestão de clínicas. Agenda inteligente, prontuários eletrônicos, telemedicina e gestão financeira.",
   manifest: "/manifest.json",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/icon-192.png",
+  },
+  openGraph: {
+    title: "CheckMed - Sistema Médico Completo",
+    description: "Sistema completo de gestão de clínicas. Agenda inteligente, prontuários eletrônicos, telemedicina e gestão financeira.",
+    url: "https://checkmed.shop",
+    siteName: "CheckMed Pro",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "CheckMed Dashboard Preview",
+      },
+    ],
+    locale: "pt_BR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CheckMed - Sistema Médico Completo",
+    description: "A revolução na gestão da sua clínica. Simples, bonito e seguro.",
+    images: ["/og-image.png"],
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",

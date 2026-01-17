@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
     Activity, Clock, CheckCircle, MoreHorizontal, User,
     Stethoscope, LogOut, LayoutDashboard, Pill, FileText,
-    TrendingUp, Calendar, Sparkles, Video, Settings
+    TrendingUp, Calendar, Sparkles, Video, Settings, Monitor
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -183,7 +183,11 @@ export default function DashboardPage() {
                         <TrendingUp className="w-5 h-5" />
                         <span className="font-medium">Financeiro</span>
                     </Link>
-                    <Link href="/dashboard/configuracoes" className="w-full flex items-center space-x-3 px-4 py-3 hover:bg-white/5 text-slate-400 hover:text-white rounded-xl transition mt-4 border-t border-slate-800/50">
+                    <Link href="/tv" target="_blank" className="w-full flex items-center space-x-3 px-4 py-3 hover:bg-white/5 text-slate-400 hover:text-white rounded-xl transition border-t border-slate-800/50 mt-4">
+                        <Monitor className="w-5 h-5" />
+                        <span className="font-medium">Painel TV (Kiosk)</span>
+                    </Link>
+                    <Link href="/dashboard/configuracoes" className="w-full flex items-center space-x-3 px-4 py-3 hover:bg-white/5 text-slate-400 hover:text-white rounded-xl transition">
                         <Settings className="w-5 h-5" />
                         <span className="font-medium">Configurações</span>
                     </Link>
